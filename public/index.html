@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluent Bird</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Leaderboard Panel -->
+        <div class="leaderboard-panel">
+            <h2>🏆 TOP PLAYERS</h2>
+            <div class="leaderboard-list" id="leaderboard">
+                <div class="loading">Loading...</div>
+            </div>
+            <div class="wallet-info">
+                <button id="connectWallet" class="connect-btn">Connect Wallet</button>
+                <div id="walletAddress" class="wallet-address"></div>
+            </div>
+        </div>
+
+        <!-- Game Canvas -->
+        <div class="game-wrapper">
+            <canvas id="gameCanvas" width="400" height="600"></canvas>
+            <div class="game-overlay" id="gameOverlay">
+                <h1 class="game-title">FLAPPY BIRD</h1>
+                <p class="game-subtitle">Fluent Blockchain Edition</p>
+                <button class="play-btn" id="playBtn">PLAY</button>
+                <div class="instructions">
+                    <p>Press SPACE or Click to fly</p>
+                    <p>Avoid the pipes!</p>
+                </div>
+            </div>
+            <div class="game-over-overlay" id="gameOverOverlay" style="display: none;">
+                <h2>GAME OVER</h2>
+                <p class="final-score">Score: <span id="finalScore">0</span></p>
+                <input type="text" id="playerName" placeholder="Enter your name" maxlength="20" class="name-input">
+                <button class="submit-btn" id="submitScore">Submit to Blockchain</button>
+                <button class="play-again-btn" id="playAgainBtn">Play Again</button>
+            </div>
+        </div>
+
+        <!-- Score Display -->
+        <div class="score-display" id="scoreDisplay">0</div>
+        <a href="https://x.com/0xkren">by 0xKren</a>
+    </div>
+
+    <!-- Ethers.js with multiple CDN options -->
+    <script>
+        // Try multiple CDN sources for ethers.js
+        function loadEthers() {
+            return new Promise((resolve, reject) => {
+                const cdnUrls = [
+                    'https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js',
+                    'https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js'
+                ];
+                
+                let currentIndex = 0;
+                
+                function tryNextCdn() {
+                    if (currentIndex >= cdnUrls.length) {
+                        reject(new Error('Failed to load ethers.js from all CDNs'));
+                        return;
+                    }
+                    
+                    const script = document.createElement('script');
+                    script.src = cdnUrls[currentIndex];
+                    script.onload = () => {
+                        console.log('Ethers.js loaded successfully from:', cdnUrls[currentIndex]);
+                        resolve();
+                    };
+                    script.onerror = () => {
+                        console.warn('Failed to load from:', cdnUrls[currentIndex]);
+                        currentIndex++;
+                        tryNextCdn();
+                    };
+                    document.head.appendChild(script);
+                }
+                
+                tryNextCdn();
+            });
+        }
+        
+        // Load ethers.js before game.js
+        loadEthers().then(() => {
+            const gameScript = document.createElement('script');
+            gameScript.src = 'game.js';
+            document.body.appendChild(gameScript);
+        }).catch(error => {
+            console.error('Failed to load ethers.js:', error);
+            alert('Failed to load Web3 libraries. Please refresh the page.');
+        });
+    </script>
+</body>
+</html>
