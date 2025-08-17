@@ -1,0 +1,286 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.game-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+/* Leaderboard Panel */
+.leaderboard-panel {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 25px;
+    width: 300px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid #ffd700;
+}
+
+.leaderboard-panel h2 {
+    color: #ffd700;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.leaderboard-list {
+    margin-bottom: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.leaderboard-entry {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    transition: all 0.3s ease;
+}
+
+.leaderboard-entry:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: translateX(5px);
+}
+
+.leaderboard-entry.gold {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #000;
+}
+
+.leaderboard-entry.silver {
+    background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+    color: #000;
+}
+
+.leaderboard-entry.bronze {
+    background: linear-gradient(135deg, #cd7f32, #e8a05c);
+    color: #000;
+}
+
+.rank {
+    font-size: 14px;
+    font-weight: bold;
+    width: 30px;
+}
+
+.player-info {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.player-name {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.player-address {
+    font-size: 8px;
+    opacity: 0.7;
+    word-break: break-all;
+}
+
+.player-score {
+    font-size: 12px;
+    color: #ffd700;
+}
+
+/* Game Wrapper */
+.game-wrapper {
+    position: relative;
+    background: #87CEEB;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 4px solid #333;
+}
+
+#gameCanvas {
+    display: block;
+}
+
+/* Game Overlays */
+.game-overlay, .game-over-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.game-title {
+    font-size: 32px;
+    color: #ffd700;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 0 #333;
+}
+
+.game-subtitle {
+    font-size: 12px;
+    color: #87CEEB;
+    margin-bottom: 30px;
+}
+
+.play-btn, .play-again-btn, .submit-btn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    padding: 15px 30px;
+    background: #ffd700;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.play-btn:hover, .play-again-btn:hover, .submit-btn:hover {
+    background: #ffed4e;
+    transform: scale(1.1);
+}
+
+.instructions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.instructions p {
+    font-size: 10px;
+    margin: 5px;
+    color: #ccc;
+}
+
+/* Score Display */
+.score-display {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 36px;
+    color: white;
+    text-shadow: 2px 2px 0 #333;
+    z-index: 5;
+}
+
+/* Wallet Connection */
+.wallet-info {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.connect-btn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    padding: 10px 15px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.connect-btn:hover {
+    background: #45a049;
+}
+
+.wallet-address {
+    font-size: 8px;
+    margin-top: 10px;
+    color: #87CEEB;
+    word-break: break-all;
+}
+
+/* Game Over Overlay */
+.final-score {
+    font-size: 20px;
+    color: #ffd700;
+    margin: 20px 0;
+}
+
+.name-input {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #ffd700;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.name-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffd700;
+    border-radius: 4px;
+}
+
+/* Loading Animation */
+.loading {
+    text-align: center;
+    font-size: 12px;
+    color: #87CEEB;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .leaderboard-panel {
+        width: 100%;
+        max-width: 400px;
+        order: 2;
+    }
+    
+    .game-wrapper {
+        order: 1;
+    }
+}
