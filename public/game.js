@@ -15,7 +15,7 @@ const leaderboardDiv = document.getElementById('leaderboard');
 
 // Fluent Testnet Configuration
 const FLUENT_CHAIN_ID = '0x5222'; // 20994 in hex
-const CONTRACT_ADDRESS = ''; // Replace this!
+const CONTRACT_ADDRESS = '0x05a71bb7054594da2d49d8be2a22e1629196263b'; // Replace this!
 const CONTRACT_ABI = [
     "function submitScore(uint256 _score, string memory _playerName) external",
     "function getLeaderboard() external view returns (tuple(address playerAddress, string playerName, uint256 highScore, uint256 timestamp)[])"
